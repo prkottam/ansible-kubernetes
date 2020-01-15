@@ -1,0 +1,13 @@
+---
+- name: The K8s Module
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks: 
+   - name: Fetch all deployments
+     set_fact:
+       deployments: "{{ lookup('k8s', kind='Deployment', namespace='testing') }}" 
+       register: deployments
+   - name: debug output
+     debug:
+       var: deployments
